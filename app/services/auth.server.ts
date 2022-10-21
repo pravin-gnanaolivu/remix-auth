@@ -5,6 +5,9 @@ import invariant from "tiny-invariant";
 import { createUser, findUser, User, verifyLogin } from "~/models/user.server";
 import { GoogleStrategy, SocialsProvider } from "remix-auth-socials";
 
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  throw new Error("Google CLIENT_ID and CLIENT_SECRET should be provided");
+}
 
 export let authenticator = new Authenticator<User>(sessionStorage, {
   sessionKey: "accessToken",
@@ -13,7 +16,7 @@ export let authenticator = new Authenticator<User>(sessionStorage, {
 
 authenticator.use(
   new FormStrategy(async ({ form }) => {
-    let email = form.get("email"); 
+    let email = form.get("email");
     let password = form.get("password");
 
     invariant(typeof email === "string", "email must be a string");
@@ -21,7 +24,6 @@ authenticator.use(
 
     invariant(typeof password === "string", "password must be a string");
     invariant(password.length > 0, "password must not be empty");
-
 
     const userExists = await findUser(email);
     if (!userExists) {
@@ -38,22 +40,31 @@ authenticator.use(
   "user-pass"
 );
 
-authenticator.use(new GoogleStrategy(
-  {
-    clientID: ENV.GOOGLE_CLIENT_ID,
-    clientSecret: ENV.GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:3000/auth/${SocialsProvider.GOOGLE}/callback`
-  },
-  async ({ profile }) => {
-    console.log({profile})
-    const {  email, given_name, family_name } = profile._json
+authenticator.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `http://localhost:3000/auth/${SocialsProvider.GOOGLE}/callback`,
+    },
+    async ({ profile }) => {
+      console.log({ profile });
+      const { email, given_name, family_name } = profile._json;
 
-    const existingUser = await findUser(email);
-    if (existingUser) {
-      return existingUser
+      const existingUser = await findUser(email);
+      if (existingUser) {
+        return existingUser;
+      }
+
+      const user = await createUser(
+        {
+          firstName: given_name,
+          lastName: family_name ? family_name : "",
+          email,
+        },
+        ""
+      );
+      return user;
     }
-
-    const user = await createUser({ firstName: given_name, lastName: family_name ? family_name : '', email }, '')
-    return user
-  }
-));
+  )
+);
