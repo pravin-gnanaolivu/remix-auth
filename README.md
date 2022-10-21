@@ -1,8 +1,27 @@
-# Authentication using remix-auth and remix-auth-socials
+# Remix Auth Example
 
-**Remix Auth** Library is really cool and simple 😎. Validation has been added with **remix-validation-form** .
+![Remix Auth](https://www.simplilearn.com/ice9/free_resources_article_thumb/The_Importance_of_User_Authentication_Methods_in_Cyber_Security.jpg)
 
-- [Remix Docs](https://remix.run/docs)
+**Remix Auth** Library is really cool😎 and easy to use. Here I'm adding an basic login to authenticate with remix-auth and signup form with validation using **remix-validation-form** to make validation easy.
+
+I deployed this in vercel, you can use the below link 
+
+[Remix Auth Example](https://remix-auth-rho.vercel.app/)
+
+
+## What's in the stack
+
+- Production-ready [heruko postgre-sql Database](https://sqlite.org)
+- Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
+- Database ORM with [Prisma](https://prisma.io)
+- Styling with [Tailwind](https://tailwindcss.com/)
+- Code formatting with [Prettier](https://prettier.io)
+- Linting with [ESLint](https://eslint.org)
+- Static Types with [TypeScript](https://typescriptlang.org)
+
+## Library used
+- Remix Auth[For secure cookie based Authentication](https://github.com/sergiodxa/remix-auth)
+- Remix Validated Form[To Make form validation easy](https://www.remix-validated-form.io/)
 
 ## Deployment
 
