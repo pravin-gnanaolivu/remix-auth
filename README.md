@@ -6,7 +6,7 @@
 
 I deployed this in vercel, you can use the below link 
 
-[Remix Auth Example](https://remix-auth-rho.vercel.app/)
+[Remix Auth Demo](https://remix-auth-rho.vercel.app/)
 
 
 ## What's in the stack
@@ -20,8 +20,8 @@ I deployed this in vercel, you can use the below link
 - Static Types with [TypeScript](https://typescriptlang.org)
 
 ## Library used
-- Remix Auth[For secure cookie based Authentication](https://github.com/sergiodxa/remix-auth)
-- Remix Validated Form[To Make form validation easy](https://www.remix-validated-form.io/)
+- Remix Auth [For secure cookie based Authentication](https://github.com/sergiodxa/remix-auth)
+- Remix Validated Form [To Make form validation easy](https://www.remix-validated-form.io/)
 
 ## Deployment
 
