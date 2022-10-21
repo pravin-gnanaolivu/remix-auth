@@ -45,7 +45,7 @@ authenticator.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `https://remix-auth-rho.vercel.app/auth/${SocialsProvider.GOOGLE}/callback`,
+      callbackURL: `https://remix-auth-dun.vercel.app/auth/${SocialsProvider.GOOGLE}/callback`,
     },
     async ({ profile }) => {
       console.log({ profile });

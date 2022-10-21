@@ -4,10 +4,9 @@
 
 **Remix Auth** Library is really cool😎 and easy to use. Here I'm adding an basic login to authenticate with remix-auth and signup form with validation using **remix-validation-form** to make validation easy.
 
-I deployed this in vercel, you can use the below link 
+I deployed this in vercel, you can use the below link
 
-[Remix Auth Demo](https://remix-auth-rho.vercel.app/)
-
+[Remix Auth Demo](https://remix-auth-dun.vercel.app/)
 
 ## What's in the stack
 
@@ -20,6 +19,7 @@ I deployed this in vercel, you can use the below link
 - Static Types with [TypeScript](https://typescriptlang.org)
 
 ## Library used
+
 - Remix Auth [For secure cookie based Authentication](https://github.com/sergiodxa/remix-auth)
 - Remix Validated Form [To Make form validation easy](https://www.remix-validated-form.io/)
 
