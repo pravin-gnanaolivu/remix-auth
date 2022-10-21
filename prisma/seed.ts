@@ -20,7 +20,11 @@ async function seed() {
       email,
       firstName,
       lastName,
-      password: hashedPassword,
+      password: {
+        create: {
+          hash: hashedPassword
+        }
+      },
     },
   });
 

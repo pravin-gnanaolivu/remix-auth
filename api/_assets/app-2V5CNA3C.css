@@ -591,14 +591,6 @@ video {
   width: 10rem;
 }
 
-.w-28 {
-  width: 7rem;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
 .max-w-md {
   max-width: 28rem;
 }
@@ -748,11 +740,6 @@ video {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .font-medium {

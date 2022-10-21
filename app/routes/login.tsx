@@ -8,7 +8,11 @@ import {
 import { ActionArgs, json, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import { createUserSession, getSession } from "~/services/session.server";
+import { SocialsProvider } from "remix-auth-socials";
+
 import { safeRedirect } from "~/utils";
+import { SocialButton } from "~/components/SocialButton";
+import { Button } from "~/components/Button";
 
 // Second, we need to export an action function, here we will use the
 // `authenticator.authenticate method`
@@ -62,7 +66,7 @@ export default function LoginRoute() {
     transition.submission?.formData.get("intent") === "login";
   const redirectTo = searchParams.get("redirectTo") || "/";
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex min-h-screen flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
           <div>
@@ -125,16 +129,20 @@ export default function LoginRoute() {
           {error && <p className="text-red-500">{error.message}</p>}
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <div className="flex items-center justify-between gap-6">
-            <button
-              type="submit"
-              name="intent"
-              value="login"
-              className="w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
-            >
-              {isSubmitting ? "Please wait..." : "Log in"}
-            </button>
+            <Button
+              {...{
+                type: "submit",
+                name: "intent",
+                value: "login",
+              }}
+              label={isSubmitting ? "Please wait..." : "Log in"}
+            />
           </div>
         </Form>
+        <SocialButton
+          label="Sign In with google"
+          provider={SocialsProvider.GOOGLE}
+        />
         <div className="flex justify-between pt-6">
           <Link to="/signup" className="text-blue-600 underline">
             New here?

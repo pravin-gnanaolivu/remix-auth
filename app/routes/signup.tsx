@@ -1,5 +1,10 @@
-import { Link } from "@remix-run/react";
-import { ActionFunction, LoaderFunction, json } from "@remix-run/node";
+import { Link, useCatch } from "@remix-run/react";
+import {
+  ActionFunction,
+  LoaderFunction,
+  json,
+  redirect,
+} from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import { createUser, findUser } from "~/models/user.server";
 import { getSession } from "~/services/session.server";
@@ -8,6 +13,7 @@ import { ValidatedForm, validationError } from "remix-validated-form";
 import { z } from "zod";
 import FormInput from "~/components/FormInput";
 import SubmitButton from "~/components/SubmitButton";
+import { ErrorComponent } from "~/components/500";
 
 const schema = z
   .object({
@@ -55,12 +61,17 @@ export const action: ActionFunction = async ({ request }) => {
   const { firstName, lastName, email, password } = formData.data;
 
   try {
-    await createUser({ firstName, lastName, email, password });
+    await createUser({ firstName, lastName, email }, password);
   } catch {
     throw new Error("Uh oh! Seems there is an issue, sorry😒");
   }
 
-  return json({ message: "User Created 😍", status: 200 });
+  return new Response("User Created 😍", {
+    status: 302,
+    headers: {
+      Location: "/login",
+    },
+  });
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -74,7 +85,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function SignUpRoute() {
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex min-h-screen flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <ValidatedForm
           validator={validator}
@@ -99,5 +110,17 @@ export default function SignUpRoute() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: unknown }) {
+  if (error instanceof Error) {
+    return <ErrorComponent error={error} />;
+  }
+
+  return (
+    <ErrorComponent
+      error={{ message: "Something went wrong 😒", name: "Unknown Error" }}
+    />
   );
 }
