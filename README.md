@@ -1,8 +1,6 @@
 # Remix Auth Example
 
-![Remix Auth](https://www.simplilearn.com/ice9/free_resources_article_thumb/The_Importance_of_User_Authentication_Methods_in_Cyber_Security.jpg)
-
-**Remix Auth** Library is really cool😎 and easy to use. Here I'm adding an basic login to authenticate with remix-auth and signup form with validation using **remix-validation-form** to make validation easy.
+A Simple Authentication example using **Remix Auth** & **Remix Social Auth** Library
 
 I deployed this in vercel, you can use the below link
 
